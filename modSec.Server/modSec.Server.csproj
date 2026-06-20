@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <RootNamespace>ModSec.Server</RootNamespace>
+        <AssemblyName>modSec.Server</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+        <Version>0.2.43</Version>
+        <OutputPath>build/</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SPTarkov.Common" Version="4.0.3" />
+        <PackageReference Include="SPTarkov.DI" Version="4.0.3" />
+        <PackageReference Include="SPTarkov.Server.Core" Version="4.0.3" />
+        <PackageReference Include="SPTarkov.Server.Web" Version="4.0.3" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GamePath Condition="'$(GamePath)' == ''"></GamePath>
+        <ModsDirectoryPath Condition="'$(ModsDirectoryPath)' == ''">$(GamePath)/SPT/user/mods/modSec</ModsDirectoryPath>
+    </PropertyGroup>
+
+    <Target Name="CopyToSPT" AfterTargets="AfterBuild" Condition="'$(GamePath)' != '' And Exists('$(GamePath)')">
+        <Message Importance="high" Text="Copying ModSec server files to $(ModsDirectoryPath)" />
+        <ItemGroup>
+            <FilesToCopy Include="$(OutputPath)$(TargetName)$(TargetExt)" />
+            <FilesToCopy Include="$(OutputPath)$(TargetName).pdb" Condition="Exists('$(OutputPath)$(TargetName).pdb')" />
+            <FilesToCopy Include="$(OutputPath)$(TargetName).deps.json" Condition="Exists('$(OutputPath)$(TargetName).deps.json')" />
+            <ConfigFiles Include="config\**\*" />
+            <ConfigFilesToCopy Include="@(ConfigFiles)" Condition="!Exists('$(ModsDirectoryPath)\config\%(RecursiveDir)%(Filename)%(Extension)')" />
+        </ItemGroup>
+        <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(ModsDirectoryPath)" ContinueOnError="false" />
+        <Copy SourceFiles="@(ConfigFilesToCopy)" DestinationFiles="@(ConfigFilesToCopy->'$(ModsDirectoryPath)\config\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+        <Message Text="ModSec server files copied successfully." Importance="high" />
+    </Target>
+</Project>

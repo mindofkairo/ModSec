@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>ModSec</RootNamespace>
+        <AssemblyName>modSec</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>0.2.43</Version>
+        <OutputPath>build/</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RefsPath>../../References</RefsPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="BepInEx">
+            <HintPath>$(RefsPath)/BepInEx.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(RefsPath)/Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="spt-common">
+            <HintPath>$(RefsPath)/spt-common.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="spt-reflection">
+            <HintPath>$(RefsPath)/spt-reflection.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(RefsPath)/Newtonsoft.Json.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(RefsPath)/UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(RefsPath)/UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>$(RefsPath)/UnityEngine.IMGUIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(RefsPath)/UnityEngine.UI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>$(RefsPath)/UnityEngine.UIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>$(RefsPath)/UnityEngine.TextRenderingModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GamePath Condition="'$(GamePath)' == ''"></GamePath>
+        <PluginPath Condition="'$(PluginPath)' == ''">$(GamePath)/BepInEx/plugins/modSec</PluginPath>
+    </PropertyGroup>
+
+    <Target Name="CopyToGame" AfterTargets="AfterBuild" Condition="'$(GamePath)' != '' And Exists('$(GamePath)')">
+        <Message Importance="high" Text="Copying ModSec client plugin to $(PluginPath)" />
+        <ItemGroup>
+            <PluginFiles Include="$(OutputPath)$(TargetName)$(TargetExt)" />
+            <PluginFiles Include="$(OutputPath)$(TargetName).pdb" Condition="Exists('$(OutputPath)$(TargetName).pdb')" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PluginPath)" ContinueOnError="false" />
+        <Message Text="ModSec client plugin copied successfully." Importance="high" />
+    </Target>
+</Project>

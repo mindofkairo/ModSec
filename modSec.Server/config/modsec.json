@@ -1,0 +1,300 @@
+{
+  "enabled": true,
+  "mode": "BlockRaid",
+  "strictWhitelist": true,
+  "startupCheck": true,
+  "backgroundChecks": true,
+  "backgroundIntervalSeconds": 60,
+  "minimumIntervalSeconds": 15,
+  "maximumIntervalSeconds": 300,
+  "strikeLimit": 3,
+  "strikeDecayMinutes": 1440,
+  "cooldownMinutes": 1,
+  "serverTimeZoneId": "UTC",
+  "autoBlockDurationsHours": [
+    24,
+    72,
+    168,
+    0
+  ],
+  "dashboard": {
+    "enabled": true,
+    "adminToken": "modsec-dev-token",
+    "allowRemoteAdmin": false,
+    "sessionMinutes": 120,
+    "failedAttemptWindowSeconds": 300,
+    "maxFailedAttempts": 5,
+    "lockoutSeconds": 300
+  },
+  "privacy": {
+    "requireClientConsent": true,
+    "allowOutsideSptScanPaths": false,
+    "sendFullSnapshotsAfterConsent": true,
+    "consentVersion": 2
+  },
+  "autoWhitelist": {
+    "enabled": false,
+    "paths": [
+      "BepInEx/plugins"
+    ],
+    "targetList": "allowedFiles",
+    "writeGeneratedFile": true,
+    "refreshGeneratedFile": false,
+    "generatedFileName": "auto-whitelist.generated.json"
+  },
+  "reportSanity": {
+    "enabled": true,
+    "emptyReportSeverity": "block",
+    "requireKnownClientVersion": true,
+    "allowNewerClientVersion": true,
+    "versionMismatchSeverity": "warn",
+    "flagSuspiciousLoadedPlugins": true,
+    "flagSuspiciousUnreportedDlls": true,
+    "suspiciousSeverity": "warn",
+    "suspiciousNamePatterns": []
+  },
+  "clientPresence": {
+    "enabled": true,
+    "missingClientAction": "block",
+    "graceSeconds": 45,
+    "heartbeatIntervalSeconds": 120,
+    "heartbeatTimeoutSeconds": 300,
+    "gateRoutes": [
+      "/client/match/local/start",
+      "/client/raid/configuration",
+      "/client/match/group/current",
+      "/fika/presence/get",
+      "/fika/raid/create",
+      "/fika/raid/gethost",
+      "/fika/raid/join",
+      "/fika/update/addplayer",
+      "/fika/raid/registerPlayer",
+      "/fika/update/playerspawn"
+    ]
+  },
+  "incidentMail": {
+    "enabled": true,
+    "senderName": "Hall of Shame",
+    "sendToAllProfiles": true,
+    "includeMissingClientBlocks": true,
+    "includePolicyViolations": true,
+    "includeAutomaticBans": true,
+    "cooldownSeconds": 300,
+    "maxViolationsListed": 8,
+    "templates": {
+      "missingClientLines": [
+        "MODSEC HOST RULE NOTICE",
+        "",
+        "Player: {player}",
+        "Action: raid access blocked",
+        "Reason: ModSec client did not report for this game launch.",
+        "Route: {route}",
+        "",
+        "This attempt was blocked for this player only. Other players can continue normally."
+      ],
+      "policyViolationLines": [
+        "MODSEC HOST RULE NOTICE",
+        "",
+        "Player: {player}",
+        "Action: {status}",
+        "Local strike applied: {strikeApplied}",
+        "Strikes: {strikes}/{strikeLimit}",
+        "",
+        "Detected:",
+        "{violations}"
+      ],
+      "automaticBanLines": [
+        "MODSEC SERVER LOCKOUT",
+        "",
+        "Player: {player}",
+        "Reason: {banReason}",
+        "Unlock: {unlockUtc}",
+        "",
+        "Detected:",
+        "{violations}"
+      ]
+    }
+  },
+  "scanPaths": [
+    "BepInEx/plugins"
+  ],
+  "requiredFiles": [],
+  "allowedFiles": [],
+  "blockedPlugins": [
+    {
+      "id": "block-drakia-botdebug-guid",
+      "name": "DrakiaXYZ BotDebug",
+      "guid": "xyz.drakia.botdebug",
+      "displayName": "DrakiaXYZ-BotDebug",
+      "reason": "DrakiaXYZ BotDebug is not allowed on this server.",
+      "severity": "block"
+    }
+  ],
+  "blockedFiles": [
+    {
+      "id": "block-drakia-botdebug-exact",
+      "name": "DrakiaXYZ BotDebug",
+      "path": "BepInEx/plugins/DrakiaXYZ-BotDebug.dll",
+      "glob": "",
+      "hash": "",
+      "reason": "DrakiaXYZ BotDebug is not allowed on this server.",
+      "severity": "block"
+    },
+    {
+      "id": "block-any-botdebug-top-level",
+      "name": "Any top-level BotDebug plugin",
+      "path": "",
+      "glob": "BepInEx/plugins/*BotDebug*.dll",
+      "hash": "",
+      "reason": "BotDebug plugins are not allowed on this server.",
+      "severity": "block"
+    },
+    {
+      "id": "block-any-botdebug-nested",
+      "name": "Any nested BotDebug plugin",
+      "path": "",
+      "glob": "BepInEx/plugins/**/*BotDebug*.dll",
+      "hash": "",
+      "reason": "BotDebug plugins are not allowed on this server.",
+      "severity": "block"
+    },
+    {
+      "id": "example-block-spt-bot-debug-top-level",
+      "name": "Example blocked debug plugin",
+      "path": "",
+      "glob": "BepInEx/plugins/SPT-BotDebug*.dll",
+      "hash": "",
+      "reason": "Debug plugin is not allowed on this server.",
+      "severity": "block"
+    },
+    {
+      "id": "example-block-spt-bot-debug-nested",
+      "name": "Example blocked debug plugin",
+      "path": "",
+      "glob": "BepInEx/plugins/**/SPT-BotDebug*.dll",
+      "hash": "",
+      "reason": "Debug plugin is not allowed on this server.",
+      "severity": "block"
+    }
+  ],
+  "configFiles": [
+    {
+      "id": "megamod-debug-settings",
+      "name": "MegaMod debug settings",
+      "path": "BepInEx/config/com.cwx.megamod.cfg",
+      "format": "bepinex",
+      "required": false,
+      "rules": [
+        {
+          "id": "megamod-master-key-disabled",
+          "name": "MegaMod MasterKey disabled",
+          "section": "1- All Mods",
+          "key": "MasterKey - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-instant-search-disabled",
+          "name": "MegaMod InstantSearch disabled",
+          "section": "2- Debug Mods",
+          "key": "InstantSearch - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-food-water-disabled",
+          "name": "MegaMod FoodWater disabled",
+          "section": "2- Debug Mods",
+          "key": "FoodWater - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-loot-loss-disabled",
+          "name": "MegaMod LootLoss disabled",
+          "section": "2- Debug Mods",
+          "key": "LootLoss - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-inventory-viewer-disabled",
+          "name": "MegaMod InventoryViewer disabled",
+          "section": "2- Debug Mods",
+          "key": "InventoryViewer - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-god-mode-disabled",
+          "name": "MegaMod GodMode disabled",
+          "section": "2- Debug Mods",
+          "key": "GodMode - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-thermal-mode-disabled",
+          "name": "MegaMod ThermalMode disabled",
+          "section": "2- Debug Mods",
+          "key": "ThermalMode - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-better-thermal-mode-disabled",
+          "name": "MegaMod BetterThermalMode disabled",
+          "section": "2- Debug Mods",
+          "key": "BetterThermalMode - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "megamod-night-vision-mode-disabled",
+          "name": "MegaMod NightVisionMode disabled",
+          "section": "2- Debug Mods",
+          "key": "NightVisionMode - On/Off",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        }
+      ]
+    },
+    {
+      "id": "freecam-raid-advantage-settings",
+      "name": "Freecam raid advantage settings",
+      "path": "BepInEx/config/com.terkoiz.freecam.cfg",
+      "format": "bepinex",
+      "required": false,
+      "rules": [
+        {
+          "id": "freecam-global-fall-damage-enabled",
+          "name": "Freecam global fall damage disable blocked",
+          "section": "Fall Damage",
+          "key": "Globally Disable Fall Damage",
+          "operator": "in",
+          "allowedValues": [ "false" ],
+          "severity": "block"
+        },
+        {
+          "id": "freecam-teleport-to-camera-unbound",
+          "name": "Freecam teleport-to-camera must be unbound",
+          "section": "Keybinds",
+          "key": "Teleport To Camera",
+          "operator": "in",
+          "allowedValues": [ "", "Unknown", "None" ],
+          "severity": "block"
+        }
+      ]
+    }
+  ],
+  "configRules": []
+}

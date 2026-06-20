@@ -1,0 +1,135 @@
+  {
+    "id": "auto-whitelist-bepinex-plugins-backdoorbanditclient-doorbreach-dll",
+    "name": "DoorBreach.dll",
+    "path": "BepInEx/plugins/BackdoorBanditClient/DoorBreach.dll",
+    "glob": "",
+    "hash": "ac47c445be34d4cc389a8b3aaaf537a19055e264795e0d91fbb9b7b7c27b6c90",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-debugplus-dll",
+    "name": "DebugPlus.dll",
+    "path": "BepInEx/plugins/DebugPlus.dll",
+    "glob": "",
+    "hash": "8ad35fba1325b4b2cc7bc7834117e7dd579942c2fb5113dec28ca48db1f2c3b6",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-deminvincibility-dll",
+    "name": "Deminvincibility.dll",
+    "path": "BepInEx/plugins/Deminvincibility.dll",
+    "glob": "",
+    "hash": "ba1176d75896985633a25feac66cc108a1d9cb03d54d19d7cd2dd944bd9cba92",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-drakiaxyz-botdebug-dll",
+    "name": "DrakiaXYZ-BotDebug.dll",
+    "path": "BepInEx/plugins/DrakiaXYZ-BotDebug.dll",
+    "glob": "",
+    "hash": "27df1b10840885c88c08f9774ca4176c3152da088d4da5ac3cf4a4ae8bbfef3a",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-drexira-dragondendevtool-dll",
+    "name": "Drexira.DragonDenDevTool.dll",
+    "path": "BepInEx/plugins/Drexira.DragonDenDevTool.dll",
+    "glob": "",
+    "hash": "6af9aab9c20046d42abd66482a0abb1f571ac57feab3938289a6e4aee359ef0b",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-flir-enemymarkers-flir-enemymarkers-dll",
+    "name": "flir.enemymarkers.dll",
+    "path": "BepInEx/plugins/flir.enemymarkers/flir.enemymarkers.dll",
+    "glob": "",
+    "hash": "e5c17a7dbe7e160cc8e77fb8c93e0095f8f3862801672c1eef86a3ebc80a9dbd",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-oldtarkovmovement-dll",
+    "name": "OldTarkovMovement.dll",
+    "path": "BepInEx/plugins/OldTarkovMovement.dll",
+    "glob": "",
+    "hash": "1d6aab9e247dd95a2c424d9599ebb0eb0f98356a508f73d8a242ba3df712ce7b",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-perfk-headshotredirect-dll",
+    "name": "perfk.HeadShotRedirect.dll",
+    "path": "BepInEx/plugins/perfk.HeadShotRedirect.dll",
+    "glob": "",
+    "hash": "d50369ee2149a1b9f975e74451321182a43d3ab6ab01b577fc22e8353b879cf2",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-ryzen-icannotdie-dll",
+    "name": "ICannotDie.dll",
+    "path": "BepInEx/plugins/ryzen/ICannotDie.dll",
+    "glob": "",
+    "hash": "8efdcfd06ae4a18c6e1a415fa5cb058bf75e42942adb6bdb4909ace8ae6e52e1",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-ryzen-icanrunforever-dll",
+    "name": "ICanRunForever.dll",
+    "path": "BepInEx/plugins/ryzen/ICanRunForever.dll",
+    "glob": "",
+    "hash": "dcc379c183232851d7d3099d62b50db81fae6276195e996e308e1580d52fe9b7",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-sptexfilnow-sptexfilnow-dll",
+    "name": "SPTExfilNow.dll",
+    "path": "BepInEx/plugins/SPTExfilNow/SPTExfilNow.dll",
+    "glob": "",
+    "hash": "9b79a637876d374da1a3683e49af12686218095668b98fd55a2e8e43ab959c13",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-sptopensesame-dll",
+    "name": "SPTOpenSesame.dll",
+    "path": "BepInEx/plugins/SPTOpenSesame.dll",
+    "glob": "",
+    "hash": "15681053478e9fca4621931b66deb38028d2be48c6f979b004ff2f3c24d8ca38",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-terkoiz-freecam-dll",
+    "name": "Terkoiz.Freecam.dll",
+    "path": "BepInEx/plugins/Terkoiz.Freecam.dll",
+    "glob": "",
+    "hash": "0e2466eb3d44f047fa94b256409d1d366f422f22e7b069fbef9fac0449c3aa48",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-terkoiz-skipper-dll",
+    "name": "Terkoiz.Skipper.dll",
+    "path": "BepInEx/plugins/Terkoiz.Skipper.dll",
+    "glob": "",
+    "hash": "c535112eff8fd6e52f4d1cf0cee1c515fc887c4a17065cbace05a6bae6eb045a",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
+  {
+    "id": "auto-whitelist-bepinex-plugins-tyrian-radar-dll",
+    "name": "Tyrian-Radar.dll",
+    "path": "BepInEx/plugins/Tyrian-Radar.dll",
+    "glob": "",
+    "hash": "7e8ef99e808b568e0e19a898fcd6b1e93364297f2ae4804ebfcbc91552da0557",
+    "reason": "Auto-whitelisted from the server install.",
+    "severity": "allow"
+  },
