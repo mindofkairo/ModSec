@@ -4,7 +4,7 @@ namespace ModSec.Server.Models;
 
 public static class ModSecConstants
 {
-    public const string Version = "0.2.43";
+    public const string Version = "0.2.47";
     public const string ServerGuid = "com.kairo.modsec.server";
     public const string ClientGuid = "com.kairo.modsec.client";
 }
@@ -136,7 +136,7 @@ public class ClientPresenceOptions
     public int GraceSeconds { get; set; } = 45;
     public int HeartbeatIntervalSeconds { get; set; } = 120;
     public int HeartbeatTimeoutSeconds { get; set; } = 120;
-    public List<string> GateRoutes { get; set; } = ["/client/match/local/start", "/client/raid/configuration", "/client/match/group/current", "/fika/presence/get", "/fika/raid/create", "/fika/raid/gethost", "/fika/raid/join", "/fika/update/addplayer", "/fika/raid/registerPlayer", "/fika/update/playerspawn"];
+    public List<string> GateRoutes { get; set; } = ["/client/match/local/start", "/fika/raid/create", "/fika/raid/join", "/fika/update/addplayer", "/fika/raid/registerPlayer", "/fika/update/playerspawn"];
 }
 
 public class IncidentMailOptions

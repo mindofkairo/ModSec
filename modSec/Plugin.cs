@@ -85,6 +85,15 @@ public class Plugin : BaseUnityPlugin
             StartCoroutine(RunPopupPoll());
         }
 
+        var profileId = GetProfileId();
+        if (!_heartbeatRunning
+            && !string.Equals(profileId, _clientId, StringComparison.OrdinalIgnoreCase)
+            && !string.Equals(profileId, _lastReportedProfileId, StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(RunHeartbeat());
+            return;
+        }
+
         if ((_blocked && !_allowChecksWhileBlocked) || _checkRunning || _policy is not { BackgroundChecks: true })
         {
             return;
@@ -99,15 +108,6 @@ public class Plugin : BaseUnityPlugin
                 StartCoroutine(RunBackgroundCheck());
             }
 
-            return;
-        }
-
-        var profileId = GetProfileId();
-        if (!_heartbeatRunning
-            && !string.Equals(profileId, _clientId, StringComparison.OrdinalIgnoreCase)
-            && !string.Equals(profileId, _lastReportedProfileId, StringComparison.OrdinalIgnoreCase))
-        {
-            StartCoroutine(RunHeartbeat());
             return;
         }
 
@@ -381,9 +381,9 @@ public class Plugin : BaseUnityPlugin
             }
             if (_allowChecksWhileBlocked)
             {
-                ScheduleNextCheck(response.Status == "banned"
+                ScheduleNextBlockedCheck(response.Status == "banned"
                     ? Math.Min(response.NextCheckSeconds, 30)
-                    : Math.Min(response.NextCheckSeconds, 10));
+                    : Math.Min(response.NextCheckSeconds, 5));
             }
 
             return;
@@ -566,6 +566,12 @@ public class Plugin : BaseUnityPlugin
         _nextCheckAt = Time.realtimeSinceStartup + safeSeconds;
     }
 
+    private void ScheduleNextBlockedCheck(int seconds)
+    {
+        var safeSeconds = Mathf.Clamp(seconds, 5, 300);
+        _nextCheckAt = Time.realtimeSinceStartup + safeSeconds;
+    }
+
     private void ScheduleNextHeartbeat(int seconds)
     {
         var safeSeconds = Mathf.Clamp(seconds, 30, 900);
@@ -618,10 +624,7 @@ public class Plugin : BaseUnityPlugin
     private static bool CanManualRecheck(EnforcementResponse response)
     {
         return response.Status == "banned"
-               || response.Violations.Any(violation =>
-                   violation.Path.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase)
-                   || violation.Path.EndsWith(".json", StringComparison.OrdinalIgnoreCase)
-                   || violation.RuleId.StartsWith("megamod-", StringComparison.OrdinalIgnoreCase));
+               || response.Violations.Count > 0;
     }
 
     private static string LoadClientId()

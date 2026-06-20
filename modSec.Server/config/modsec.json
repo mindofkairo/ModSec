@@ -61,11 +61,7 @@
     "heartbeatTimeoutSeconds": 300,
     "gateRoutes": [
       "/client/match/local/start",
-      "/client/raid/configuration",
-      "/client/match/group/current",
-      "/fika/presence/get",
       "/fika/raid/create",
-      "/fika/raid/gethost",
       "/fika/raid/join",
       "/fika/update/addplayer",
       "/fika/raid/registerPlayer",

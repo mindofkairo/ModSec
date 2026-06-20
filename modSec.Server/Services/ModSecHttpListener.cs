@@ -1255,7 +1255,37 @@ public class ModSecHttpListener(ModSecConfigService configService, ModSecInciden
                 : canonical.InstallId;
             canonical.RiskScore = Math.Max(canonical.RiskScore, fallback.RiskScore);
             canonical.MissingClientAttempts += fallback.MissingClientAttempts;
+            MergeFallbackEnforcementState(canonical, fallback);
             _players.Remove(key);
+        }
+    }
+
+    private static void MergeFallbackEnforcementState(PlayerState canonical, PlayerState fallback)
+    {
+        if (fallback.BannedUntilUtc is { } fallbackBan
+            && (canonical.BannedUntilUtc == null || fallbackBan > canonical.BannedUntilUtc))
+        {
+            canonical.BannedUntilUtc = fallbackBan;
+            canonical.BanReason = fallback.BanReason;
+            canonical.BanCount = Math.Max(canonical.BanCount, fallback.BanCount);
+        }
+
+        if (fallback.Strikes > canonical.Strikes)
+        {
+            canonical.Strikes = fallback.Strikes;
+            canonical.CooldownUntilUtc = fallback.CooldownUntilUtc;
+            canonical.LastViolationSignature = fallback.LastViolationSignature;
+        }
+
+        if (fallback.ActiveEnforcementStatus.Equals("blocked", StringComparison.OrdinalIgnoreCase)
+            || fallback.ActiveEnforcementStatus.Equals("banned", StringComparison.OrdinalIgnoreCase))
+        {
+            canonical.ActiveEnforcementStatus = fallback.ActiveEnforcementStatus;
+            canonical.ActiveViolations = fallback.ActiveViolations.TakeLast(20).ToList();
+            canonical.LastViolationAtUtc = fallback.LastViolationAtUtc;
+            canonical.RecentViolations = fallback.RecentViolations.TakeLast(20).ToList();
+            canonical.LastPublishedEnforcementSignature = fallback.LastPublishedEnforcementSignature;
+            canonical.LastPublishedEnforcementAtUtc = fallback.LastPublishedEnforcementAtUtc;
         }
     }
 
@@ -1418,9 +1448,9 @@ public class ModSecHttpListener(ModSecConfigService configService, ModSecInciden
         if (!forcePass
             && state.ActiveEnforcementStatus.Equals("blocked", StringComparison.OrdinalIgnoreCase)
             && state.ActiveViolations.Count > 0
-            && state.LastCleanAtUtc is not null
-            && state.LastViolationAtUtc is not null
-            && state.LastCleanAtUtc <= state.LastViolationAtUtc)
+            && (state.LastCleanAtUtc is null
+                || state.LastViolationAtUtc is null
+                || state.LastCleanAtUtc <= state.LastViolationAtUtc))
         {
             return;
         }
@@ -1527,6 +1557,13 @@ public class ModSecHttpListener(ModSecConfigService configService, ModSecInciden
 
         if (state.ActiveViolations.Count == 0
             || !state.ActiveEnforcementStatus.Equals("blocked", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        if (state.LastCleanAtUtc is { } lastClean
+            && state.LastViolationAtUtc is { } lastViolation
+            && lastClean > lastViolation)
         {
             return false;
         }

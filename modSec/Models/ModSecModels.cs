@@ -2,7 +2,7 @@ namespace ModSec.Models;
 
 public static class ModSecConstants
 {
-    public const string Version = "0.2.43";
+    public const string Version = "0.2.47";
     public const string ClientGuid = "com.kairo.modsec.client";
 }
 
