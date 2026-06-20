@@ -4,7 +4,7 @@ It checks each client's SPT mod/config setup against rules chosen by the server 
 
 Go protect your raids, king.
 
-![modsec-screenshot-security-alert](https://i.imgur.com/e5V0XGp.png)
+![modsec-screenshot-security-alert](https://i.imgur.com/F5EQdXB.png)
 
 ### Overview
 
